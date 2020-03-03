@@ -13,7 +13,11 @@ const routes: Routes = [
   },
   {
     path: 'registrate',
-    loadChildren: () => import('./registrate/registrate.module').then( m => m.RegistratePageModule)
+    loadChildren: () => import('./registrate/registrate.module').then( m => m.RegistratePageModule),canActivate:[NologinGuard]
+  },
+  {
+    path: 'prueba',
+    loadChildren: () => import('./prueba/prueba.module').then( m => m.PruebaPageModule)
   }
 ];
 @NgModule({
