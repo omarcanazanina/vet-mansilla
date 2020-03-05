@@ -39,10 +39,10 @@ export class MetodosService {
       this.fireauth.auth.createUserWithEmailAndPassword(email, password).then(res => {
         console.log(res.user.uid);
         this.db.collection('users').doc(res.user.uid).set({
-          nombre: nombre,
-          telefono: telefono,
-          email: email,
-          password: password
+          nombre,
+          telefono,
+          email,
+          password
         })
         this.router.navigate(['/tabs/tab1'])
       }).catch(err => rejected(err))

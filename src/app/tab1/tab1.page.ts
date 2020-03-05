@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ImagenesService } from '../servicios/imagenes.service';
 
 @Component({
   selector: 'app-tab1',
@@ -8,10 +9,20 @@ import { Router } from '@angular/router';
 })
 export class Tab1Page {
 
-  constructor(private route:Router) {}
+  constructor(private route:Router,
+              private imagenes:ImagenesService) {}
 
 
   ir(){
-    this.route.navigate(['/prueba'])
+    this.route.navigate(['/agregar-usuario'])
   }
+
+  image(){
+    this.imagenes.takePicture().then(res =>{
+      this.imagenes.uploadImgB64("producto1/prueba.jpg",res).then(url =>{
+        console.log(url);
+      })
+    }).catch(err => alert('error'+err))
+  }
+
 }
