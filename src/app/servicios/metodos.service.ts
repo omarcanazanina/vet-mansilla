@@ -3,6 +3,8 @@ import { AngularFireAuth } from '@angular/fire/auth'
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore'
 import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 interface registerInput {
   email?: string
@@ -52,7 +54,7 @@ export class MetodosService {
     return  this.fireauth.auth.createUserWithEmailAndPassword(register.email, register.password)
       .then(res => {
         console.log(res.user.uid);
-        delete register.password
+        //delete register.password
         return this.db.collection('users').doc(res.user.uid).set(register)
       })
   }
@@ -68,4 +70,10 @@ export class MetodosService {
     equals: this.equalsValidator
   }
   //fin
+  getcollArrayconkey(coll, query?): Observable<any> {
+    return this.db.collection<any>(coll, query)
+      .snapshotChanges().pipe(map(change => {
+        return change.map(c => ({ id: c.payload.doc.id, ...c.payload.doc.data() }))
+      }))
+  }
 }

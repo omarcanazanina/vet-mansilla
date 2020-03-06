@@ -8,12 +8,19 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
+        path: 'usuarios',
         children: [
           {
             path: '',
-            loadChildren: () =>
-              import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+            loadChildren: () => import('../pages/usuarios/index/index.module').then( m => m.IndexPageModule)
+          },
+          {
+            path: 'crear',
+            loadChildren: () => import('../pages/usuarios/crear/crear.module').then( m => m.CrearPageModule)
+          },
+          {
+            path: 'modificar',
+            loadChildren: () => import('../pages/usuarios/modificar/modificar.module').then( m => m.ModificarPageModule)
           }
         ]
       },
@@ -39,14 +46,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/usuarios',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/usuarios',
     pathMatch: 'full'
   }
 ];
