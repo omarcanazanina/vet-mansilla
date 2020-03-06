@@ -22,6 +22,18 @@ const routes: Routes = [
   {
     path: 'agregar-usuario',
     loadChildren: () => import('./agregar-usuario/agregar-usuario.module').then( m => m.AgregarUsuarioPageModule)
+  },
+  {
+    path: 'index',
+    loadChildren: () => import('./pages/usuarios/index/index.module').then( m => m.IndexPageModule)
+  },
+  {
+    path: 'crear',
+    loadChildren: () => import('./pages/usuarios/crear/crear.module').then( m => m.CrearPageModule)
+  },
+  {
+    path: 'modificar',
+    loadChildren: () => import('./pages/usuarios/modificar/modificar.module').then( m => m.ModificarPageModule)
   }
 ];
 @NgModule({

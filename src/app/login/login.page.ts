@@ -32,8 +32,8 @@ export class LoginPage implements OnInit {
 
   login() {
     this.loginForm.value
-    this.metodos.login(this.loginForm.get('email').value, this.password).then(res => {
-      this.router.navigate(['/tabs/tab1'])
+    this.metodos.login(this.loginForm.get('email').value, this.loginForm.get('password').value).then(res => {
+      this.router.navigate(['/tabs/usuarios'])
     }).catch(err => alert('datos incorrectos'))
   }
 
