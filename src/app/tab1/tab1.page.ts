@@ -9,20 +9,21 @@ import { ImagenesService } from '../servicios/imagenes.service';
 })
 export class Tab1Page {
 
-  constructor(private route:Router,
-              private imagenes:ImagenesService) {}
+  constructor(private route: Router,
+    private imagenes: ImagenesService) { }
 
 
-  ir(){
+  ir() {
     this.route.navigate(['/agregar-usuario'])
   }
 
-  image(){
-    this.imagenes.takePicture().then(res =>{
-      this.imagenes.uploadImgB64("producto1/prueba.jpg",res).then(url =>{
+  image() {
+    this.imagenes.takePicture().then(res => {
+      this.imagenes.uploadImgB64("producto1/prueba.jpg", res).then(url => {
         console.log(url);
       })
-    }).catch(err => alert('error'+err))
+    }).catch(err => alert('error' + err))
   }
+
 
 }
