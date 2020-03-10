@@ -24,6 +24,7 @@ const routes: Routes = [
     loadChildren: () => import('./agregar-usuario/agregar-usuario.module').then( m => m.AgregarUsuarioPageModule)
   },
 
+
 ];
 @NgModule({
   imports: [

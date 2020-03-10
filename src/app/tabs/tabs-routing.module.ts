@@ -21,7 +21,11 @@ const routes: Routes = [
           {
             path: 'modificar',
             loadChildren: () => import('../pages/usuarios/modificar/modificar.module').then( m => m.ModificarPageModule)
-          }
+          },
+          {
+            path: 'ver',
+            loadChildren: () => import('../pages/usuarios/ver/ver.module').then( m => m.VerPageModule)
+          },
         ]
       },
       {

@@ -14,17 +14,37 @@
     <ion-list-header>
       <ion-label>Vendedores</ion-label>
     </ion-list-header>
-    <ion-item *ngFor="let item of vendedores" (click)="presentActionSheet(item)">
-      <ion-icon slot="end" name="ellipsis-vertical"></ion-icon>
-      <ion-label>{{item.nombre}}</ion-label>
+    <ng-container *ngIf="!vendedores; else elseV">
+      <ion-item>
+        <ion-label>
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+    </ng-container>
+    <ng-template #elseV>
+      <ion-item *ngFor="let item of vendedores" (click)="presentActionSheet(item)">
+        <ion-icon slot="start" [name]="!item.estado?'close':'checkmark'"></ion-icon>
+        <ion-icon slot="end" name="ellipsis-vertical"></ion-icon>
+        <ion-label>{{item.nombre}}</ion-label>
+      </ion-item>
+    </ng-template>
 
-    </ion-item>
+
     <ion-list-header>
       <ion-label>Repartidores</ion-label>
     </ion-list-header>
-    <ion-item *ngFor="let item of repartidores" (click)="presentActionSheet(item)">
-      <ion-icon slot="end" name="ellipsis-vertical"></ion-icon>
-      <ion-label>{{item.nombre}}</ion-label>
+    <ion-item *ngIf="!vendedores; else elseR">
+      <ion-label>
+        <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+      </ion-label>
     </ion-item>
+    <ng-template #elseR>
+      <ion-item *ngFor="let item of repartidores" (click)="presentActionSheet(item)">
+        <ion-icon slot="start" [name]="!item.estado?'close':'checkmark'"></ion-icon>
+        <ion-icon slot="end" name="ellipsis-vertical"></ion-icon>
+        <ion-label>{{item.nombre}}</ion-label>
+      </ion-item>
+
+    </ng-template>
   </ion-list>
 </ion-content>
