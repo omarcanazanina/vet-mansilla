@@ -37,7 +37,8 @@ export class CrearPage implements OnInit {
       telefono: ["", [
         Validators.required,
         Validators.minLength(8),
-        Validators.maxLength(15)
+        Validators.maxLength(15),
+        Validators.pattern(/^-?(0|[1-9]\d*)?$/)
       ]],
       estado:true
     });
@@ -51,24 +52,21 @@ export class CrearPage implements OnInit {
   }
 
   registrate() {
-    this.uiService.presentLoading("Guardando Usuario...")
-    .then(load=>{
-
-      this.registerForm.value
-      delete this.registerForm.value.confirm_password
-      //this.metodos.registro(this.email, this.password, this.nombre, this.telefono).then(res => {
-      //  this.router.navigate(['/tabs/tab1'])
-      //}).catch(err => console.log(err));
-      this.metodos.registro2(this.registerForm.value).then(() => {
-        //this.router.navigate(['/tabs/tab1'])
-        console.log("aceptado");
-        load.dismiss()
-        this.uiService.MessageToastSuccess("usuario guardado correctamente")
-        this.navCtrl.back()
-      }).catch(err => {
-        console.log(err)
-        this.uiService.MessageToastError("Error al guardar el usuario")
-      });
+    this.uiService.presentAlertConfirm("Seguro que desea guardar al empleado",
+    ()=>{
+      this.uiService.presentLoading("Guardando Usuario...")
+      .then(load=>{
+        delete this.registerForm.value.confirm_password
+        this.metodos.registro2(this.registerForm.value).then(() => {
+          load.dismiss()
+          this.uiService.MessageToastSuccess("usuario guardado correctamente")
+          this.navCtrl.back()
+        }).catch(err => {
+          console.log(err)
+          load.dismiss()
+          this.uiService.MessageToastError("Error al guardar el usuario")
+        });
+      })
     })
   }
 

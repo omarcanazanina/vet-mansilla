@@ -28,6 +28,7 @@ const routes: Routes = [
     loadChildren: () => import('./lineas/lineas.module').then( m => m.LineasPageModule)
   },
 
+
 ];
 @NgModule({
   imports: [
