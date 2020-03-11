@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ActionSheetController } from '@ionic/angular';
+import { FabricasService } from '../servicios/fabricas.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
@@ -9,15 +10,21 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+  lista_fabricas:any
+  constructor(private router: Router,
+    private alertController: AlertController,
+    private db:AngularFirestore,
+    private fabricas:FabricasService,
+    private actionSheetController:ActionSheetController) { }
 
-  constructor(private router:Router,
-              private alertController:AlertController,
-              private db: AngularFirestore) {}
+  ngOnInit(){
+  this.listar_fabricas()
+  }
 
   async ir() {
     const alert = await this.alertController.create({
       header: 'Crear fábrica',
-      backdropDismiss:false,
+      backdropDismiss: false,
       inputs: [
         {
           name: 'fabrica',
@@ -38,12 +45,59 @@ export class Tab2Page {
           handler: dato => {
             console.log(dato.fabrica);
             this.db.collection('fabrica').add({
-              nombre:dato.fabrica
+              nombre: dato.fabrica
             })
           }
         }
       ]
     });
     await alert.present();
+  }
+
+  listar_fabricas(){
+    this.fabricas.recuperafabricas().subscribe(datos =>{
+      this.lista_fabricas = datos
+      console.log(this.lista_fabricas);
+      
+    })
+  }
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Opciones',
+      buttons: [
+        {
+          text: 'Ver',
+          icon: 'eye',
+          handler: () => {
+            console.log('Share clicked');
+          }
+        },
+        {
+          text: 'Modificar',
+          icon: 'create',
+          handler: () => {
+            console.log('Share clicked');
+          }
+        }, {
+          text: 'Delete',
+          role: 'destructive',
+          icon: 'trash',
+          handler: () => {
+            console.log('Delete clicked');
+          }
+        }, {
+          text: 'Cancel',
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }]
+    });
+    await actionSheet.present();
+  }
+
+  ir_linea(item){
+    this.router.navigate(['/lineas',item.id,item.nombre])
   }
 }

@@ -54,7 +54,7 @@ export class RegistratePage implements OnInit {
     //  this.router.navigate(['/tabs/tab1'])
     //}).catch(err => console.log(err));
     this.metodos.registro2(this.registerForm.value).then(() => {
-      this.router.navigate(['/tabs/tab1'])
+      this.router.navigate(['/tabs/usuarios'])
       console.log("aceptado");
       
     }).catch(err => console.log(err));

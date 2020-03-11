@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'agregar-usuario',
     loadChildren: () => import('./agregar-usuario/agregar-usuario.module').then( m => m.AgregarUsuarioPageModule)
   },
+  {
+    path: 'lineas/:id/:nombre',
+    loadChildren: () => import('./lineas/lineas.module').then( m => m.LineasPageModule)
+  },
 
 ];
 @NgModule({
