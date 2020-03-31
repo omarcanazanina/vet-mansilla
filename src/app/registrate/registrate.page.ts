@@ -45,6 +45,7 @@ export class RegistratePage implements OnInit {
   }
 
   ngOnInit() {
+    //kdllithis.metodos
   }
 
   registrate() {
@@ -56,7 +57,6 @@ export class RegistratePage implements OnInit {
     this.metodos.registro2(this.registerForm.value).then(() => {
       this.router.navigate(['/tabs/usuarios'])
       console.log("aceptado");
-      
     }).catch(err => console.log(err));
   }
 

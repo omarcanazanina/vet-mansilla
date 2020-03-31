@@ -29,14 +29,17 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab2',
+        path: 'fabricas',
         children: [
           {
             path: '',
-            loadChildren: () =>
-              import('../tab2/tab2.module').then(m => m.Tab2PageModule)
-          }
-        ]
+            loadChildren: () => import('../pages/fabricas/index/index.module').then(m => m.IndexPageModule)
+          },
+          {
+            path: 'listar-lineas/:id/:nombre',
+            loadChildren: () => import('../pages/fabricas/listar-lineas/listar-lineas.module').then(m => m.ListarLineasPageModule)
+          },
+        ] 
       },
       {
         path: 'tab3',
